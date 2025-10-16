@@ -133,17 +133,12 @@ export default function Home() {
 
                       try {
                         const formData = new FormData()
-                        formData.append("file", selectedFile)
 
-                        const apiBase = process.env.NEXT_PUBLIC_API_BASE  || "http://localhost:5000" || "https://cnn-cifar10-backend.onrender.com"
-                        console.log("apiBase : ", apiBase)
-
+                        const apiBase = process.env.NEXT_PUBLIC_API_BASE  || "http://localhost:5000" 
                         const res = await fetch(`${apiBase}/predict`, {
                           method: "POST",
                           body: formData,
                         })
-
-                        console.log("Request Response : ", res)
 
                         const data = await res.json()
 
