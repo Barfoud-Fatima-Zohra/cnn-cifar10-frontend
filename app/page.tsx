@@ -136,11 +136,14 @@ export default function Home() {
                         formData.append("file", selectedFile)
 
                         const apiBase = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000"
+                        console.log("apiBase : ", apiBase)
 
                         const res = await fetch(`${apiBase}/predict`, {
                           method: "POST",
                           body: formData,
                         })
+
+                        console.log("Request Response : ", res)
 
                         const data = await res.json()
 
