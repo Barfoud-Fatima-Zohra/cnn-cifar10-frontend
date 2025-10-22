@@ -165,8 +165,8 @@ export default function Home() {
 
                         formData.append("file", selectedFile)
 
-                        const apiBase = "http://localhost:5000"
-                        // const apiBase = process.env.NEXT_PUBLIC_API_BASE  || "http://localhost:5000" 
+                        // const apiBase = "http://localhost:5000"
+                        const apiBase = process.env.NEXT_PUBLIC_API_BASE  || "http://localhost:5000" 
                         const res = await fetch(`${apiBase}/predict`, {
                           method: "POST",
                           body: formData,
