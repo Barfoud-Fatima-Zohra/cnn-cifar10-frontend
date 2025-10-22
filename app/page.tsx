@@ -21,28 +21,14 @@ import { useRef, useState } from "react"
 import { FaFrog } from "react-icons/fa"
 
 
-
-// const CIFAR_CLASSES = [
-//   { name: "airplane", icon: "✈️" },
-//   { name: "automobile", icon: "🚗" },
-//   { name: "bird", icon: "🐦" },
-//   { name: "cat", icon: "🐱" },
-//   { name: "deer", icon: "🦌" },
-//   { name: "dog", icon: "🐕" },
-//   { name: "frog", icon: "🐸" },
-//   { name: "horse", icon: "🐴" },
-//   { name: "ship", icon: "⛵" },
-//   { name: "truck", icon: "🚚" },
-// ]
-
 const CIFAR_CLASSES = [
   { name: "airplane", icon: IconPlane },
   { name: "automobile", icon: IconCar },
-  { name: "bird", icon: IconFeather }, // pas d'icône "bird" exacte, feather = symbole léger
+  { name: "bird", icon: IconFeather },
   { name: "cat", icon: IconCat },
   { name: "deer", icon: IconDeer },
   { name: "dog", icon: IconDog },
-  { name: "frog", icon: FaFrog }, // pas d'icône frog, on met un insecte
+  { name: "frog", icon: FaFrog },
   { name: "horse", icon: IconHorse },
   { name: "ship", icon: IconShip },
   { name: "truck", icon: IconTruck },
@@ -142,6 +128,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6 flex items-center justify-center gap-3">
                   <Button
+                    className="cursor-pointer"
                     variant="outline"
                     size="lg"
                     onClick={() => {
@@ -152,7 +139,7 @@ export default function Home() {
                   </Button>
                   <Button
                     size="lg"
-                    className="gap-2"
+                    className="gap-2 cursor-pointer"
                     disabled={loading}
                     onClick={async () => {
                       if (!selectedFile) return
@@ -162,18 +149,13 @@ export default function Home() {
 
                       try {
                         const formData = new FormData()
-
                         formData.append("file", selectedFile)
-
-                        // const apiBase = "http://localhost:5000"
                         const apiBase = process.env.NEXT_PUBLIC_API_BASE  || "http://localhost:5000" 
                         const res = await fetch(`${apiBase}/predict`, {
                           method: "POST",
                           body: formData,
                         })
-
                         const data = await res.json()
-                        console.log("prediction : ", data.prediction)
                         if (res.ok && data.prediction) {
                           setPrediction({
                             class: data.prediction,
@@ -189,10 +171,10 @@ export default function Home() {
                       } finally {
                         setLoading(false)
                       }
+                      
                     }}
+
                   >
-                    {/* <Sparkles className="w-4 h-4" />
-                    Predict class */}
 
                     {loading ? (
                       <svg
